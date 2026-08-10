@@ -358,6 +358,9 @@ function ExpandedService({
                 <div className="pt-8">
                     <ServiceDetails service={service} />
                 </div>
+                <p className="mt-8 text-xs uppercase tracking-[0.16em] text-[#D7E2EA]/35">
+                    Click this card again or press Esc to return to the catalog
+                </p>
             </motion.article>
         </motion.div>
     );
@@ -479,15 +482,15 @@ function ServicesCatalog({ services }: { services: Service[] }) {
                         <motion.p
                             layout="position"
                             className="mt-4 text-center text-xs uppercase tracking-[0.16em] text-[#D7E2EA]/45"
-                            animate={{ opacity: selectionReady ? 1 : 0 }}
+                            animate={{ opacity: pileReady ? 1 : 0 }}
                             transition={{
                                 layout: {
                                     duration: 1.35,
                                     ease: [0.16, 1, 0.3, 1],
                                 },
                                 opacity: {
-                                    duration: 0.55,
-                                    delay: selectionReady ? 0.1 : 0,
+                                    duration: 0.7,
+                                    delay: 0,
                                 },
                             }}
                         >

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useScroll } from "framer-motion";
+import { type MotionValue, useScroll } from "framer-motion";
 import { AppWindow, Boxes, Download, Layers3, PackageCheck } from "lucide-react";
 import AnimatedText from "../components/AnimatedText";
 import FadeIn from "../components/FadeIn";
@@ -22,35 +22,79 @@ const PROOF_ITEMS = [
 const DECORATIONS = [
   {
     src: "/about/crescent.png",
-    className:
-        "absolute top-[2%] left-[5vw] w-[120px] sm:left-[6vw] sm:w-[155px] md:left-[7vw] md:w-[190px] lg:left-[9vw] xl:left-[10vw] 2xl:left-[calc((100vw-72rem)/4-95px)] opacity-85",
+    side: "left" as const,
+    slotClassName: "top-[clamp(2.5rem,5svh,4rem)]",
+    sizeClassName: "w-[clamp(56px,72cqw,190px)] opacity-85",
     x: -140,
     delay: 0.1,
     parallax: { name: "crescent", range: [-5, 5] as [number, number] },
   },
   {
     src: "/about/code-brackets.svg",
-    className:
-        "absolute bottom-[5%] left-[5vw] w-[120px] sm:left-[6vw] sm:w-[155px] md:bottom-[210px] md:left-[7vw] md:w-[170px] lg:left-[9vw] xl:left-[10vw] 2xl:left-[calc((100vw-72rem)/4-85px)] opacity-80",
+    side: "left" as const,
+    slotClassName: "bottom-[clamp(9rem,20svh,13rem)]",
+    sizeClassName: "w-[clamp(56px,72cqw,170px)] opacity-80",
     x: -140,
     delay: 0.25,
   },
   {
     src: "/about/phone.svg",
-    className:
-        "absolute top-[2%] right-[5vw] w-[92px] sm:right-[6vw] sm:w-[120px] md:right-[7vw] md:w-[145px] lg:right-[9vw] xl:right-[10vw] 2xl:right-[calc((100vw-72rem)/4-72.5px)] opacity-85",
+    side: "right" as const,
+    slotClassName: "top-[clamp(2.5rem,5svh,4rem)]",
+    sizeClassName: "w-[clamp(50px,68cqw,145px)] opacity-85",
     x: 140,
     delay: 0.15,
   },
   {
     src: "/about/cursor.png",
-    className:
-        "absolute bottom-[4%] right-[5vw] w-[120px] sm:right-[6vw] sm:w-[155px] md:bottom-[205px] md:right-[7vw] md:w-[175px] lg:right-[9vw] xl:right-[10vw] 2xl:right-[calc((100vw-72rem)/4-87.5px)] opacity-85",
+    side: "right" as const,
+    slotClassName: "bottom-[clamp(9rem,20svh,13rem)]",
+    sizeClassName: "w-[clamp(56px,72cqw,175px)] opacity-85",
     x: 140,
     delay: 0.3,
     parallax: { name: "cursor", range: [10, -10] as [number, number] },
   },
 ];
+
+function DecorationRail({
+                          side,
+                          progress,
+                        }: {
+  side: "left" | "right";
+  progress: MotionValue<number>;
+}) {
+  return (
+      <div className="relative [container-type:inline-size]">
+        {DECORATIONS.filter((decoration) => decoration.side === side).map((decoration) => (
+            <div
+                key={decoration.src}
+                className={`absolute inset-x-0 flex justify-center ${decoration.slotClassName}`}
+            >
+              <FadeIn
+                  delay={decoration.delay}
+                  x={decoration.x}
+                  y={0}
+                  duration={0.9}
+                  className={decoration.sizeClassName}
+                  once={false}
+              >
+                {decoration.parallax ? (
+                    <ScrollDrift
+                        progress={progress}
+                        range={decoration.parallax.range}
+                        name={decoration.parallax.name}
+                    >
+                      <img src={decoration.src} alt="" className="h-auto w-full" />
+                    </ScrollDrift>
+                ) : (
+                    <img src={decoration.src} alt="" className="h-auto w-full" />
+                )}
+              </FadeIn>
+            </div>
+        ))}
+      </div>
+  );
+}
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -65,29 +109,14 @@ export default function AboutSection() {
           id="about"
           className="relative overflow-hidden px-5 pt-12 pb-8 sm:px-8 sm:pt-14 sm:pb-10 md:px-10 md:pt-16 md:pb-12"
       >
-        {DECORATIONS.map((decoration) => (
-            <FadeIn
-                key={decoration.src}
-                delay={decoration.delay}
-                x={decoration.x}
-                y={0}
-                duration={0.9}
-                className={decoration.className}
-                once={false}
-            >
-              {decoration.parallax ? (
-                  <ScrollDrift
-                      progress={scrollYProgress}
-                      range={decoration.parallax.range}
-                      name={decoration.parallax.name}
-                  >
-                    <img src={decoration.src} alt="" className="h-auto w-full" />
-                  </ScrollDrift>
-              ) : (
-                  <img src={decoration.src} alt="" className="h-auto w-full" />
-              )}
-            </FadeIn>
-        ))}
+        <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 grid grid-cols-[minmax(1.25rem,1fr)_minmax(0,72rem)_minmax(1.25rem,1fr)] sm:grid-cols-[minmax(2rem,1fr)_minmax(0,72rem)_minmax(2rem,1fr)] md:grid-cols-[minmax(2.5rem,1fr)_minmax(0,72rem)_minmax(2.5rem,1fr)]"
+        >
+          <DecorationRail side="left" progress={scrollYProgress} />
+          <div />
+          <DecorationRail side="right" progress={scrollYProgress} />
+        </div>
 
         <div className="relative z-10 mx-auto max-w-6xl">
           <RevealHeading
@@ -122,7 +151,7 @@ export default function AboutSection() {
                     className="inline-flex items-center gap-2 rounded-md bg-[#D7E2EA] px-5 py-3 text-xs font-semibold uppercase tracking-wide text-[#0C0C0C] transition-colors hover:bg-white sm:text-sm"
                 >
                   <Download size={16} strokeWidth={2.4} />
-                  Download CV
+                  Download résumé
                 </a>
               </FadeIn>
             </div>
