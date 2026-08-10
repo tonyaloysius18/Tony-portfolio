@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 620" role="img">
+  <defs>
+    <linearGradient id="glass" x1="90" y1="60" x2="680" y2="565" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8FFFF"/>
+      <stop offset=".14" stop-color="#51DFFF"/>
+      <stop offset=".36" stop-color="#3268FF"/>
+      <stop offset=".58" stop-color="#9E35F5"/>
+      <stop offset=".78" stop-color="#FF4FCC"/>
+      <stop offset="1" stop-color="#36F5E4"/>
+    </linearGradient>
+    <linearGradient id="core" x1="140" y1="130" x2="622" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#77F4FF" stop-opacity=".9"/>
+      <stop offset=".35" stop-color="#4524C8" stop-opacity=".86"/>
+      <stop offset=".72" stop-color="#9D168F" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#10174F" stop-opacity=".95"/>
+    </linearGradient>
+    <linearGradient id="glassBack" x1="130" y1="130" x2="650" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#155D80"/>
+      <stop offset=".35" stop-color="#251269"/>
+      <stop offset=".72" stop-color="#6A115F"/>
+      <stop offset="1" stop-color="#092C45"/>
+    </linearGradient>
+    <linearGradient id="sideShine" x1="120" y1="120" x2="640" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#83FBFF" stop-opacity=".75"/>
+      <stop offset=".5" stop-color="#7B2CD3" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#2A073E"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="130" y1="100" x2="580" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity=".92"/>
+      <stop offset=".2" stop-color="white" stop-opacity=".12"/>
+      <stop offset=".55" stop-color="#FFB9F5" stop-opacity=".35"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-35%" y="-40%" width="180%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="11" result="blur"/>
+      <feColorMatrix in="blur" values="0 0 0 0 0.33 0 0 0 0 0.04 0 0 0 0 0.7 0 0 0 .66 0"/>
+      <feOffset dx="8" dy="10" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" transform="rotate(-5 380 310)">
+    <path d="M305 140 114 329l191 189 62-64-126-125 126-126Z" fill="url(#glassBack)" stroke="#250B57" stroke-width="14" stroke-linejoin="round"/>
+    <path d="m487 140 191 189-191 189-62-64 126-125-126-126Z" fill="url(#glassBack)" stroke="#250B57" stroke-width="14" stroke-linejoin="round"/>
+    <path d="m448 92-143 470" stroke="url(#glassBack)" stroke-width="82" stroke-linecap="round"/>
+    <path d="M289 120 98 309l191 189 62-64-126-125 126-126Z" fill="url(#glass)" stroke="#E8FFFF" stroke-opacity=".62" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M277 164 132 309l145 145 33-34-111-111 111-111Z" fill="url(#core)"/>
+    <path d="M270 138 117 300" fill="none" stroke="url(#highlight)" stroke-width="22" stroke-linecap="round" opacity=".72"/>
+    <path d="m471 120 191 189-191 189-62-64 126-125-126-126Z" fill="url(#glass)" stroke="#E8FFFF" stroke-opacity=".62" stroke-width="12" stroke-linejoin="round"/>
+    <path d="m483 164 145 145-145 145-33-34 111-111-111-111Z" fill="url(#core)"/>
+    <path d="m488 138 154 162" fill="none" stroke="url(#highlight)" stroke-width="22" stroke-linecap="round" opacity=".7"/>
+    <path d="m430 74-143 470" stroke="url(#glass)" stroke-width="77" stroke-linecap="round"/>
+    <path d="m423 91-134 438" stroke="url(#core)" stroke-width="47" stroke-linecap="round"/>
+    <path d="m412 95-57 187" stroke="white" stroke-opacity=".68" stroke-width="11" stroke-linecap="round"/>
+    <path d="M118 299 275 143" fill="none" stroke="white" stroke-opacity=".8" stroke-width="9" stroke-linecap="round"/>
+    <path d="m485 143 157 156" fill="none" stroke="#E9FFFF" stroke-opacity=".76" stroke-width="9" stroke-linecap="round"/>
+    <path d="M119 331 270 480" stroke="#FFB4FA" stroke-opacity=".42" stroke-width="16" stroke-linecap="round"/>
+    <path d="m491 479 150-148" stroke="#62F4FF" stroke-opacity=".46" stroke-width="16" stroke-linecap="round"/>
+    <path d="M286 503 341 448" stroke="#210533" stroke-opacity=".76" stroke-width="10" stroke-linecap="round"/>
+    <path d="m474 503-55-55" stroke="#210533" stroke-opacity=".76" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>

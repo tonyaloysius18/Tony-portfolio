@@ -158,7 +158,7 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 pb-10"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 border-t border-[#D7E2EA]/10 bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 pt-20 pb-10"
     >
       <FadeIn>
         <h2

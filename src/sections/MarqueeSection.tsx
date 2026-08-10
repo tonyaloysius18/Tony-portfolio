@@ -1,27 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { MARQUEE_ROW_ONE, MARQUEE_ROW_TWO } from "../data/techStack";
 
-const ROW1 = [
-  "Kotlin Multiplatform",
-  "Compose Multiplatform",
-  "Swift",
-  "Ktor",
-  "Material 3",
-  "Android",
-  "iOS",
-];
-
-const ROW2 = [
-  "Kotlin Coroutines",
-  "Firebase",
-  "REST APIs",
-  "Git",
-  "Play Console",
-  "App Store Connect",
-  "Xcode",
-];
-
-const ROW1_TRIPLED = [...ROW1, ...ROW1, ...ROW1];
-const ROW2_TRIPLED = [...ROW2, ...ROW2, ...ROW2];
+const ROW1_TRIPLED = [...MARQUEE_ROW_ONE, ...MARQUEE_ROW_ONE, ...MARQUEE_ROW_ONE];
+const ROW2_TRIPLED = [...MARQUEE_ROW_TWO, ...MARQUEE_ROW_TWO, ...MARQUEE_ROW_TWO];
 
 function MarqueeRow({ items, offset }: { items: string[]; offset: number }) {
   return (

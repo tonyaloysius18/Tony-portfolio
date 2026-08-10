@@ -27,3 +27,33 @@
   -webkit-text-stroke: 1.5px #d7e2ea;
   text-stroke: 1.5px #d7e2ea;
 }
+
+@keyframes about-conveyor {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 0.375rem));
+  }
+}
+
+.about-conveyor {
+  animation: about-conveyor 46s linear infinite;
+  will-change: transform;
+}
+
+.about-conveyor:hover,
+.about-conveyor:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .about-conveyor {
+    animation: none;
+  }
+}

@@ -19,7 +19,7 @@ export default function HeroSection() {
           TA.
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {NAV_LINKS.map((link, i) => (
             <span key={link} className="flex items-center gap-8">
               <a
@@ -28,7 +28,9 @@ export default function HeroSection() {
               >
                 {link}
               </a>
-              {i === 0 && <span className="w-1 h-1 rounded-full bg-[#D7E2EA]/50" />}
+              {i < NAV_LINKS.length - 1 && (
+                <span className="w-1 h-1 rounded-full bg-[#D7E2EA]/50" />
+              )}
             </span>
           ))}
         </div>
@@ -49,20 +51,27 @@ export default function HeroSection() {
           }}
         />
 
-        <FadeIn delay={0.15} y={40}>
+        <FadeIn
+          delay={0.15}
+          y={40}
+          className="absolute inset-x-0 top-8 md:top-10 z-20"
+        >
           <h1
-            className="font-black uppercase tracking-tight leading-none text-center whitespace-nowrap"
-            style={{ fontSize: "clamp(2.5rem, 11vw, 150px)" }}
+            className="hero-heading mx-6 md:mx-10 text-center uppercase leading-none whitespace-nowrap"
+            style={{
+              fontFamily: '"Black Ops One", sans-serif',
+              fontSize: "clamp(2.5rem, 14.5vw, 190px)",
+              letterSpacing: "-0.015em",
+            }}
           >
-            <span className="hero-heading">hi, i&apos;m </span>
-            <span className="hero-heading-outline">tony.</span>
+            hi, i&apos;m tony.
           </h1>
         </FadeIn>
 
         <FadeIn
           delay={0.4}
           y={30}
-          className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 w-[200px] sm:w-[260px] md:w-[300px] lg:w-[340px]"
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 z-30 w-[200px] sm:w-[260px] md:w-[300px] lg:w-[340px]"
         >
           <Magnet
             padding={150}
@@ -89,7 +98,7 @@ export default function HeroSection() {
             Mobile app developer crafting fast, reliable Android and iOS experiences.
           </p>
           <p className="text-[#D7E2EA]/50 uppercase tracking-widest text-xs">
-            Kotlin Multiplatform · Compose · Swift · Ktor
+            Kotlin Multiplatform · Compose · REST API · Ktor
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-1">
             <a
@@ -98,12 +107,6 @@ export default function HeroSection() {
             >
               View my work
               <ArrowUpRight size={16} strokeWidth={2.5} />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 border border-[#D7E2EA]/40 text-[#D7E2EA] rounded-md px-6 py-3 uppercase tracking-wide text-xs sm:text-sm font-semibold hover:border-[#D7E2EA] transition-colors"
-            >
-              Let&apos;s talk
             </a>
           </div>
           <div className="flex items-center gap-2 text-[#D7E2EA]/70 text-xs sm:text-sm mt-1">
