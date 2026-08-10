@@ -151,7 +151,7 @@ export default function AboutSection() {
                     className="inline-flex items-center gap-2 rounded-md bg-[#D7E2EA] px-5 py-3 text-xs font-semibold uppercase tracking-wide text-[#0C0C0C] transition-colors hover:bg-white sm:text-sm"
                 >
                   <Download size={16} strokeWidth={2.4} />
-                  Download résumé
+                  Download CV
                 </a>
               </FadeIn>
             </div>
