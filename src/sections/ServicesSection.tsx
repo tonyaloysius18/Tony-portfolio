@@ -358,9 +358,6 @@ function ExpandedService({
                 <div className="pt-8">
                     <ServiceDetails service={service} />
                 </div>
-                <p className="mt-8 text-xs uppercase tracking-[0.16em] text-[#D7E2EA]/35">
-                    Click this card again or press Esc to return to the catalog
-                </p>
             </motion.article>
         </motion.div>
     );
