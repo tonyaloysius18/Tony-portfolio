@@ -269,17 +269,17 @@ function ProjectSummary({
                 </p>
             )}
 
-            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-4 md:gap-5 xl:gap-6">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-stretch gap-4 md:gap-5 xl:gap-6">
         <span
             className="font-black leading-none text-[#D7E2EA]"
             style={{
-                fontSize: mobile ? "clamp(3.5rem, 17vw, 5.5rem)" : "clamp(4.75rem, 7vw, 7.5rem)",
+                fontSize: mobile ? "clamp(3.5rem, 16vw, 5rem)" : "clamp(4.5rem, 6.25vw, 6.5rem)",
             }}
         >
           {project.number}
         </span>
 
-                <div className="grid h-full w-fit max-w-full min-w-0 grid-rows-[auto_minmax(0,1fr)_auto] py-1">
+                <div className="flex h-full w-fit max-w-full min-w-0 flex-col justify-between">
                     <h3
                         id={`project-${project.number}-title`}
                         className="whitespace-nowrap text-3xl font-semibold uppercase leading-none tracking-[0.035em] text-[#D7E2EA] md:text-4xl xl:text-5xl"
@@ -287,7 +287,7 @@ function ProjectSummary({
                         {project.name}
                     </h3>
 
-                    <div className="row-start-3 flex w-full items-center">
+                    <div className="flex w-full items-end">
                         {project.comingSoon ? (
                             <span className="inline-flex h-[34px] w-full items-center justify-center whitespace-nowrap rounded-full border border-[#D7E2EA]/28 px-3 text-[8px] font-semibold uppercase tracking-[0.11em] text-[#D7E2EA]/65 md:h-10 md:px-3.5 md:text-[9px] xl:text-[10px]">
                 Cooking now • Serving late 2026
@@ -496,20 +496,32 @@ function DesktopProjectCard({
     const [activeScreenshot, setActiveScreenshot] = useState<number | null>(null);
     const cardY = useTransform(
         progress,
-        index === 0 ? [0.025, 0.14, 0.52, 0.78] : [0.44, 0.68, 1],
-        index === 0 ? [130, 0, 0, -72] : [240, 0, 0],
+        index === 0 ? [0.025, 0.14, 0.55, 0.74] : [0.47, 0.69, 1],
+        index === 0 ? [130, 0, 0, -92] : [170, 0, 0],
+        { clamp: true },
+    );
+    const cardX = useTransform(
+        progress,
+        index === 0 ? [0.55, 0.74] : [0.47, 0.69],
+        index === 0 ? [0, -18] : [18, 0],
         { clamp: true },
     );
     const cardScale = useTransform(
         progress,
-        index === 0 ? [0.14, 0.46, 0.72] : [0.44, 0.68],
-        index === 0 ? [1, 1, 0.965] : [0.975, 1],
+        index === 0 ? [0.14, 0.55, 0.74] : [0.47, 0.69],
+        index === 0 ? [1, 1, 0.94] : [0.94, 1],
         { clamp: true },
     );
     const cardOpacity = useTransform(
         progress,
-        index === 0 ? [0.025, 0.12, 0.64, 0.78] : [0.44, 0.66],
+        index === 0 ? [0.025, 0.12, 0.57, 0.74] : [0.47, 0.69],
         index === 0 ? [0, 1, 1, 0] : [0, 1],
+        { clamp: true },
+    );
+    const cardFilter = useTransform(
+        progress,
+        index === 0 ? [0.55, 0.74] : [0.47, 0.69],
+        index === 0 ? ["blur(0px)", "blur(8px)"] : ["blur(8px)", "blur(0px)"],
         { clamp: true },
     );
     const bannerY = useTransform(
@@ -526,19 +538,26 @@ function DesktopProjectCard({
     );
     const zIndex = useTransform(progress, (latest) => {
         if (index === 0) {
-            return latest < 0.76 ? 20 : 5;
+            return latest < 0.6 ? 20 : 5;
         }
-        return latest < 0.76 ? 10 : 30;
+        return latest < 0.6 ? 10 : 30;
     });
 
     return (
         <motion.article
             aria-labelledby={`project-${project.number}-title`}
-            className="absolute inset-x-0 top-[clamp(12rem,24svh,15.5rem)] h-[min(72svh,700px)] origin-top overflow-hidden rounded-[30px] border border-[#D7E2EA]/28 bg-[#0C0C0C] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.48)] will-change-[transform,opacity] lg:rounded-[38px] lg:p-6 xl:p-8"
+            className="absolute inset-x-0 top-[clamp(12rem,24svh,15.5rem)] h-[min(72svh,700px)] origin-top overflow-hidden rounded-[30px] border border-[#D7E2EA]/28 bg-[#0C0C0C] p-5 shadow-[0_28px_90px_rgba(0,0,0,0.48)] will-change-[transform,opacity,filter] lg:rounded-[38px] lg:p-6 xl:p-8"
             style={
                 reduceMotion
                     ? { zIndex: index + 1 }
-                    : { y: cardY, scale: cardScale, opacity: cardOpacity, zIndex }
+                    : {
+                          x: cardX,
+                          y: cardY,
+                          scale: cardScale,
+                          opacity: cardOpacity,
+                          filter: cardFilter,
+                          zIndex,
+                      }
             }
         >
             <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#657FC0]/10 via-[#D7E2EA]/80 to-[#B600A8]/20" />
