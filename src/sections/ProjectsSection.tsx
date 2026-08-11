@@ -47,19 +47,19 @@ const PROJECTS: Project[] = [
                 caption: "Upcoming and previous journeys in one shared home.",
             },
             {
+                src: "/projects/itinera/calender.jpg",
+                label: "See the whole journey",
+                caption: "Every leg of the trip organised day by day in one calendar.",
+            },
+            {
+                src: "/projects/itinera/traveller.jpg",
+                label: "Travel together",
+                caption: "Keep the whole travel crew connected to the shared itinerary.",
+            },
+            {
                 src: "/projects/itinera/expense.jpg",
                 label: "Split costs",
                 caption: "Group expenses with a clear balance for every traveller.",
-            },
-            {
-                src: "/projects/itinera/document.jpg",
-                label: "Every ticket",
-                caption: "Tickets and travel documents remain available with the trip.",
-            },
-            {
-                src: "/projects/itinera/trip_detail.jpg",
-                label: "Build the itinerary",
-                caption: "Day-by-day planning with every stop in the right order.",
             },
         ],
     },
