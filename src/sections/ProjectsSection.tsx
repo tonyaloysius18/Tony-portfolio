@@ -412,63 +412,71 @@ function RaisedScreenshotPreview({
     reduceMotion: boolean;
 }) {
     const horizontalCenter = `${12.5 + index * 25}%`;
+    const [aspectRatio, setAspectRatio] = useState(9 / 16);
 
     return (
         <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute z-50 -translate-x-1/2"
+            className="pointer-events-none absolute z-50 flex -translate-x-1/2 items-end"
             initial={{ opacity: 0 }}
-            animate={{ left: horizontalCenter, opacity: 1 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={
                 reduceMotion
                     ? { duration: 0.18 }
-                    : {
-                        left: { type: "spring", stiffness: 145, damping: 24, mass: 0.85 },
-                        opacity: { duration: 0.28, ease: CARD_EASE },
-                    }
+                    : { duration: 0.24, ease: CARD_EASE }
             }
             style={{
+                // Anchor the raised card above its own slot. The clamp keeps the
+                // first and fourth previews safely inside the project-card border.
+                left: `clamp(174px, ${horizontalCenter}, calc(100% - 174px))`,
                 top: "clamp(24px, 4svh, 38px)",
                 bottom: "clamp(24px, 4svh, 38px)",
             }}
         >
             <motion.figure
-                className="relative h-full origin-bottom overflow-hidden rounded-[20px] border border-[#D7E2EA]/60 bg-[#080909] shadow-[0_34px_100px_rgba(0,0,0,0.82)] lg:rounded-[24px]"
-                style={{ width: "clamp(220px, min(17vw, 34svh), 300px)" }}
-                initial={reduceMotion ? false : { y: 34, scale: 0.94 }}
+                layout="size"
+                className="relative max-h-full origin-bottom overflow-hidden rounded-[20px] border border-[#D7E2EA]/60 bg-[#080909] shadow-[0_34px_100px_rgba(0,0,0,0.82)] lg:rounded-[24px]"
+                style={{
+                    width: "clamp(220px, min(17vw, 34svh), 300px)",
+                    aspectRatio,
+                }}
+                initial={reduceMotion ? false : { y: 72, scale: 0.94 }}
                 animate={reduceMotion ? undefined : { y: 0, scale: 1 }}
+                exit={reduceMotion ? undefined : { y: 30, scale: 0.975 }}
                 transition={
                     reduceMotion
                         ? undefined
-                        : { type: "spring", stiffness: 190, damping: 24, mass: 0.8 }
+                        : {
+                            type: "spring",
+                            stiffness: 150,
+                            damping: 23,
+                            mass: 0.9,
+                            restDelta: 0.001,
+                            restSpeed: 0.001,
+                        }
                 }
             >
-                <AnimatePresence initial={false} mode="sync">
-                    <motion.div
-                        key={screenshot.src}
-                        className="absolute inset-0"
-                        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, filter: "blur(5px)" }}
-                        animate={reduceMotion ? { opacity: 1 } : { opacity: 1, filter: "blur(0px)" }}
-                        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, filter: "blur(3px)" }}
-                        transition={{ duration: reduceMotion ? 0.16 : 0.34, ease: CARD_EASE }}
-                    >
-                        <img
-                            src={screenshot.src}
-                            alt=""
-                            className="h-full w-full object-contain object-center"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-transparent to-transparent" />
-                        <figcaption className="absolute inset-x-0 bottom-0 px-4 pb-4 lg:px-5 lg:pb-5">
-              <span className="block text-sm font-semibold text-white lg:text-base">
-                {screenshot.label}
-              </span>
-                            <span className="mt-1 block max-w-sm text-[11px] leading-relaxed text-white/68 lg:text-xs">
-                {screenshot.caption}
-              </span>
-                        </figcaption>
-                    </motion.div>
-                </AnimatePresence>
+                <img
+                    src={screenshot.src}
+                    alt=""
+                    className="h-full w-full object-contain object-center"
+                    onLoad={(event) => {
+                        const image = event.currentTarget;
+                        if (image.naturalWidth > 0 && image.naturalHeight > 0) {
+                            setAspectRatio(image.naturalWidth / image.naturalHeight);
+                        }
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-transparent to-transparent" />
+                <figcaption className="absolute inset-x-0 bottom-0 px-4 pb-4 lg:px-5 lg:pb-5">
+          <span className="block text-sm font-semibold text-white lg:text-base">
+            {screenshot.label}
+          </span>
+                    <span className="mt-1 block max-w-sm text-[11px] leading-relaxed text-white/68 lg:text-xs">
+            {screenshot.caption}
+          </span>
+                </figcaption>
             </motion.figure>
         </motion.div>
     );
@@ -583,9 +591,10 @@ function DesktopProjectCard({
                 </div>
             </div>
 
-            <AnimatePresence>
+            <AnimatePresence initial={false} mode="popLayout">
                 {activeScreenshot !== null && (
                     <RaisedScreenshotPreview
+                        key={project.screenshots[activeScreenshot].src}
                         screenshot={project.screenshots[activeScreenshot]}
                         index={activeScreenshot}
                         reduceMotion={reduceMotion}
