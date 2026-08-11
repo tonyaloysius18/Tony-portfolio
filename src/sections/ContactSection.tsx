@@ -82,7 +82,7 @@ function SocialLink({
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noreferrer" : undefined}
-          className="group relative inline-flex min-h-11 min-w-0 items-center gap-1.5 py-2 text-[9px] font-medium uppercase tracking-[0.08em] text-[#D7E2EA]/56 transition-colors duration-300 hover:text-[#D7E2EA] sm:gap-2.5 sm:text-xs sm:tracking-[0.16em] [&_svg]:h-4 [&_svg]:w-4 sm:[&_svg]:h-[18px] sm:[&_svg]:w-[18px]"
+          className="group relative inline-flex min-h-12 min-w-0 items-center justify-center gap-1.5 py-2 text-[10px] font-medium uppercase tracking-[0.08em] text-[#D7E2EA]/56 transition-colors duration-300 hover:text-[#D7E2EA] min-[390px]:gap-2 min-[390px]:text-[11px] sm:gap-2.5 sm:text-xs sm:tracking-[0.16em] [&_svg]:h-5 [&_svg]:w-5 [&_svg]:shrink-0 sm:[&_svg]:h-[18px] sm:[&_svg]:w-[18px]"
       >
         <Icon size={18} />
         <span>{label}</span>
@@ -329,16 +329,14 @@ export default function ContactSection() {
           </div>
 
           <div className="mt-16 flex flex-col gap-8 border-b border-[#D7E2EA]/14 pb-10 sm:mt-20 lg:mt-24 lg:flex-row lg:items-center lg:justify-between">
-            <nav aria-label="Social links" className="grid w-full grid-cols-3 items-center sm:flex sm:w-auto sm:gap-x-8">
+            <nav aria-label="Social links" className="grid min-h-14 w-full grid-cols-3 items-stretch sm:flex sm:min-h-0 sm:w-auto sm:items-center sm:gap-x-8">
               {SOCIAL_LINKS.map((link, index) => (
                   <div
                       key={link.label}
                       className={
                         index === 0
-                            ? "flex min-w-0 items-center justify-start"
-                            : index === SOCIAL_LINKS.length - 1
-                                ? "flex min-w-0 items-center justify-end border-l border-[#D7E2EA]/18 pl-2 sm:justify-start sm:pl-8"
-                                : "flex min-w-0 items-center justify-center border-l border-[#D7E2EA]/18 px-2 sm:justify-start sm:pl-8 sm:pr-0"
+                            ? "flex min-w-0 items-center justify-center pr-1 sm:justify-start sm:pr-0"
+                            : "flex min-w-0 items-center justify-center border-l border-[#D7E2EA]/22 px-1 sm:justify-start sm:pl-8 sm:pr-0"
                       }
                   >
                     <SocialLink {...link} />
