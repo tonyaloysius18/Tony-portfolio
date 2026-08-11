@@ -244,13 +244,13 @@ export default function ServicesSection() {
                         </div>
 
                         <motion.div
-                            className="relative flex min-h-[320px] items-center justify-center border-t border-[#D7E2EA]/12 bg-[#D7E2EA]/[0.018] p-5 sm:min-h-[420px] sm:p-9 lg:border-l lg:border-t-0"
+                            className="relative flex min-h-[300px] items-center justify-center border-t border-[#D7E2EA]/12 bg-[#D7E2EA]/[0.018] p-1 sm:min-h-[420px] sm:p-9 lg:border-l lg:border-t-0"
                             initial={reduceMotion ? false : { opacity: 0, x: 36 }}
                             whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
                             viewport={{ once: true, amount: 0.35 }}
                             transition={{ duration: 0.8, delay: 0.12, ease: EASE }}
                         >
-                            <div className="w-full max-w-[590px] [&_svg]:h-auto [&_svg]:w-full">
+                            <div className="-mx-[6%] w-[112%] max-w-none sm:mx-0 sm:w-full sm:max-w-[590px] [&_svg]:h-auto [&_svg]:w-full">
                                 <CrossPlatformDiagram />
                             </div>
                         </motion.div>
