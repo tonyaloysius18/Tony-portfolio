@@ -111,6 +111,7 @@ export default function ItineraCaseStudy() {
   const [hoveredScreen, setHoveredScreen] = useState<number | null>(null);
   const wheelLockedRef = useRef(false);
   const pointerStartXRef = useRef<number | null>(null);
+  const tabListRef = useRef<HTMLDivElement>(null);
   const reduceMotion = Boolean(useReducedMotion());
   const previewIndex = hoveredScreen ?? activeScreen;
   const screen = SCREENS[previewIndex];
@@ -148,6 +149,18 @@ export default function ItineraCaseStudy() {
       document.title = previousTitle;
     };
   }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(min-width: 1024px)").matches) return;
+    const activeTab = tabListRef.current?.querySelector<HTMLElement>(
+      `[role="tab"][data-screen-index="${activeScreen}"]`,
+    );
+    activeTab?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeScreen, reduceMotion]);
 
   return (
     <main className="min-h-screen overflow-x-clip bg-[#080909] text-[#D7E2EA]">
@@ -239,7 +252,8 @@ export default function ItineraCaseStudy() {
 
           <div className="mt-10 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:gap-8">
             <div
-              className="grid gap-2"
+              ref={tabListRef}
+              className="order-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:order-1 lg:grid lg:overflow-visible lg:pb-0"
               role="tablist"
               aria-label="Itinera product flow"
               onMouseLeave={clearPreview}
@@ -254,11 +268,12 @@ export default function ItineraCaseStudy() {
                   key={item.src}
                   type="button"
                   role="tab"
+                  data-screen-index={index}
                   aria-selected={activeScreen === index}
                   onClick={() => selectScreen(index)}
                   onMouseEnter={() => previewScreen(index)}
                   onFocus={() => previewScreen(index)}
-                  className={`min-h-16 rounded-[18px] border px-5 py-3.5 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] ${
+                  className={`min-h-16 min-w-[158px] snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-w-0 lg:px-5 lg:py-3.5 ${
                     previewIndex === index
                       ? "translate-x-1 border-[#9A4DCC]/75 bg-[#7621B0]/14 opacity-100 shadow-[0_12px_42px_rgba(118,33,176,0.2)]"
                       : hoveredScreen !== null
@@ -273,10 +288,12 @@ export default function ItineraCaseStudy() {
             </div>
 
             <div
-              className="relative min-h-[400px] cursor-grab touch-pan-y overflow-hidden rounded-[26px] border border-[#D7E2EA]/16 bg-[#0C0C0C] p-4 active:cursor-grabbing sm:min-h-[620px] sm:p-6"
+              className="relative order-1 h-[min(52svh,480px)] min-h-[380px] cursor-grab touch-pan-y overflow-hidden rounded-[26px] border border-[#D7E2EA]/16 bg-[#0C0C0C] p-4 active:cursor-grabbing sm:min-h-[620px] sm:h-auto sm:p-6 lg:order-2"
               aria-live="polite"
               onWheel={(event) => {
-                const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                const horizontalGesture = Math.abs(event.deltaX) > Math.abs(event.deltaY);
+                if (window.matchMedia("(max-width: 1023px)").matches && !horizontalGesture) return;
+                const delta = horizontalGesture ? event.deltaX : event.deltaY;
                 if (Math.abs(delta) < 18 || wheelLockedRef.current) return;
                 event.preventDefault();
                 wheelLockedRef.current = true;
