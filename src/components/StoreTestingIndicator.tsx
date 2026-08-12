@@ -4,10 +4,10 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
   return (
     <div
       aria-label="Itinera is available for the App Store and Google Play"
-      className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full border border-[#B600A8]/35 bg-[#B600A8]/8 text-[#D7E2EA]/72 ${
+      className={`inline-flex max-w-full flex-nowrap items-center gap-x-1.5 whitespace-nowrap rounded-full border border-[#B600A8]/35 bg-[#B600A8]/8 text-[#D7E2EA]/72 min-[380px]:gap-x-2 ${
         compact
           ? "px-2.5 py-1.5 text-[8px] uppercase tracking-[0.1em] md:text-[9px]"
-          : "px-4 py-2.5 text-[10px] uppercase tracking-[0.13em] sm:text-xs"
+          : "px-3 py-2.5 text-[8px] uppercase tracking-[0.08em] min-[380px]:px-4 min-[380px]:text-[9px] sm:text-xs sm:tracking-[0.13em]"
       }`}
     >
       <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
@@ -39,7 +39,7 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
           <path fill="#FF3A44" d="M15.08 14.64 12.06 12 3.2 21.4c.5.56 1.34.63 2.28.1l9.6-6.86Z" />
           <path fill="#00F076" d="M15.08 8.63 5.48 2.17c-.94-.53-1.78-.46-2.28.43l8.86 9.4 3.02-3.37Z" />
         </svg>
-        <span>Google Play</span>
+        <span>Play Store</span>
       </span>
     </div>
   );
