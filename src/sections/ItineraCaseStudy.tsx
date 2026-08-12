@@ -186,6 +186,18 @@ export default function ItineraCaseStudy() {
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4">
           <a
             href="/#projects"
+            onClick={(event) => {
+              if (
+                event.button !== 0 ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              ) return;
+              event.preventDefault();
+              window.history.pushState({}, "", "/#projects");
+              window.dispatchEvent(new Event("popstate"));
+            }}
             className="group inline-flex min-h-11 items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/68 transition-colors hover:text-[#D7E2EA]"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />

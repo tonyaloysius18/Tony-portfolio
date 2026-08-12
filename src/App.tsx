@@ -8,14 +8,24 @@ import ContactSection from "./sections/ContactSection";
 import ItineraCaseStudy from "./sections/ItineraCaseStudy";
 
 function App() {
-  const [hash, setHash] = useState(() => window.location.hash);
+  const [location, setLocation] = useState(() => ({
+    pathname: window.location.pathname,
+    hash: window.location.hash,
+  }));
+  const { pathname, hash } = location;
   const isItineraCaseStudy =
-    window.location.pathname === "/itinera-case-study" || hash === "#itinera-case-study";
+    pathname === "/itinera-case-study" || hash === "#itinera-case-study";
 
   useEffect(() => {
-    const handleHashChange = () => setHash(window.location.hash);
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    const handleLocationChange = () => {
+      setLocation({ pathname: window.location.pathname, hash: window.location.hash });
+    };
+    window.addEventListener("hashchange", handleLocationChange);
+    window.addEventListener("popstate", handleLocationChange);
+    return () => {
+      window.removeEventListener("hashchange", handleLocationChange);
+      window.removeEventListener("popstate", handleLocationChange);
+    };
   }, []);
 
   useEffect(() => {

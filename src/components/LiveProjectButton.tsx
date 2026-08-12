@@ -16,8 +16,18 @@ export default function LiveProjectButton({ variant = "light" }: LiveProjectButt
     <motion.a
       href="/itinera-case-study"
       aria-label="Open the Itinera project case study"
-      onClick={() => {
+      onClick={(event) => {
         sessionStorage.setItem("portfolio:projects-scroll-position", String(window.scrollY));
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        ) return;
+        event.preventDefault();
+        window.history.pushState({}, "", "/itinera-case-study");
+        window.dispatchEvent(new Event("popstate"));
       }}
       animate={
         reduceMotion
