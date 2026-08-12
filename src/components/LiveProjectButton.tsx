@@ -16,6 +16,9 @@ export default function LiveProjectButton({ variant = "light" }: LiveProjectButt
     <motion.a
       href="/itinera-case-study"
       aria-label="View the Itinera project case study"
+      onPointerEnter={() => void import("../sections/ItineraCaseStudy")}
+      onFocus={() => void import("../sections/ItineraCaseStudy")}
+      onTouchStart={() => void import("../sections/ItineraCaseStudy")}
       onClick={(event) => {
         sessionStorage.setItem("portfolio:projects-scroll-position", String(window.scrollY));
         if (
