@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import RevealHeading from "../components/RevealHeading";
+import VisitorCounter from "../components/VisitorCounter";
 
 const EMAIL = "ynotlabs.dev@gmail.com";
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL}`;
@@ -352,14 +353,17 @@ export default function ContactSection() {
 
           <footer className="flex flex-col gap-4 pt-8 text-xs text-[#D7E2EA]/42 sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 Tony Aloysius — Mobile App Developer, France</span>
-            <button
-                type="button"
-                onClick={handleBackToTop}
-                className="group inline-flex w-fit items-center gap-2 transition-colors hover:text-[#D7E2EA]/80"
-            >
-              Back to top
-              <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
-            </button>
+            <div className="flex flex-wrap items-center justify-between gap-3 sm:justify-end sm:gap-5">
+              <button
+                  type="button"
+                  onClick={handleBackToTop}
+                  className="group inline-flex min-h-10 w-fit items-center gap-2 transition-colors hover:text-[#D7E2EA]/80"
+              >
+                Back to top
+                <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
+              </button>
+              <VisitorCounter />
+            </div>
           </footer>
         </div>
       </section>
