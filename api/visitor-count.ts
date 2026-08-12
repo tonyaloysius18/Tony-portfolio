@@ -31,19 +31,20 @@ async function redisCommand<T>(command: Array<string | number>): Promise<T> {
   return payload.result as T;
 }
 
-function json(data: unknown, status = 200) {
-  return Response.json(data, {
-    status,
-    headers: {
-      "Cache-Control": "no-store, max-age=0",
-    },
-  });
+function json(res: any, data: unknown, status = 200) {
+  res.status(status);
+  res.setHeader("Cache-Control", "no-store, max-age=0");
+  return res.json(data);
 }
 
-export async function POST(request: Request) {
-  const visitorId = request.headers.get("x-visitor-id")?.trim();
+export default async function handler(req: any, res: any) {
+  if (req.method !== "POST") {
+    return json(res, { error: "Method not allowed" }, 405);
+  }
+
+  const visitorId = String(req.headers["x-visitor-id"] ?? "").trim();
   if (!visitorId || !/^[a-f0-9-]{36}$/i.test(visitorId)) {
-    return json({ error: "Invalid visitor identifier" }, 400);
+    return json(res, { error: "Invalid visitor identifier" }, 400);
   }
 
   try {
@@ -61,9 +62,9 @@ export async function POST(request: Request) {
       ? await redisCommand<number>(["INCR", VISITOR_TOTAL_KEY])
       : Number((await redisCommand<string | number | null>(["GET", VISITOR_TOTAL_KEY])) ?? 0);
 
-    return json({ count });
+    return json(res, { count });
   } catch (error) {
     console.error("Visitor counter error", error);
-    return json({ error: "Visitor count is temporarily unavailable" }, 503);
+    return json(res, { error: "Visitor count is temporarily unavailable" }, 503);
   }
 }
