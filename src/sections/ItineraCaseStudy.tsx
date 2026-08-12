@@ -11,6 +11,7 @@ import {
   Smartphone,
   X,
 } from "lucide-react";
+import StoreTestingIndicator from "../components/StoreTestingIndicator";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -240,6 +241,9 @@ export default function ItineraCaseStudy() {
                     {item}
                   </span>
                 ))}
+              </div>
+              <div className="mt-5">
+                <StoreTestingIndicator />
               </div>
             </div>
 
@@ -511,7 +515,22 @@ export default function ItineraCaseStudy() {
         <Reveal className="mx-auto max-w-[1100px] rounded-[30px] border border-[#D7E2EA]/18 bg-[linear-gradient(135deg,rgba(182,0,168,0.12),rgba(118,33,176,0.16))] p-7 text-center sm:rounded-[42px] sm:p-14">
           <p className="text-xs uppercase tracking-[0.22em] text-[#D7E2EA]/48">Have a mobile product in mind?</p>
           <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] sm:text-6xl">Let’s turn the idea into a focused product.</h2>
-          <a href="#contact" className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#D7E2EA] px-7 text-sm font-semibold uppercase tracking-[0.12em] text-[#080909] transition-transform hover:-translate-y-1">
+          <a
+            href="/#contact"
+            onClick={(event) => {
+              if (
+                event.button !== 0 ||
+                event.metaKey ||
+                event.ctrlKey ||
+                event.shiftKey ||
+                event.altKey
+              ) return;
+              event.preventDefault();
+              window.history.pushState({}, "", "/#contact");
+              window.dispatchEvent(new Event("popstate"));
+            }}
+            className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#D7E2EA] px-7 text-sm font-semibold uppercase tracking-[0.12em] text-[#080909] transition-transform hover:-translate-y-1"
+          >
             Start a conversation
             <ArrowUpRight className="h-5 w-5" />
           </a>

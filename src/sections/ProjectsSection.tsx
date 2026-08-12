@@ -10,6 +10,7 @@ import {
     useTransform,
 } from "framer-motion";
 import LiveProjectButton from "../components/LiveProjectButton";
+import StoreTestingIndicator from "../components/StoreTestingIndicator";
 import RevealHeading from "../components/RevealHeading";
 
 interface Screenshot {
@@ -302,6 +303,12 @@ function ProjectSummary({
             </div>
 
             <AutoFitDescription text={project.description} mobile={mobile} />
+
+            {!project.comingSoon && (
+                <div className={mobile ? "flex" : "flex min-h-7 items-center"}>
+                    <StoreTestingIndicator compact={!mobile} />
+                </div>
+            )}
 
             <div
                 className={`w-full gap-1.5 md:gap-2.5 ${

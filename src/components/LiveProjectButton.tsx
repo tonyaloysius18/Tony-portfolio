@@ -15,7 +15,7 @@ export default function LiveProjectButton({ variant = "light" }: LiveProjectButt
   return (
     <motion.a
       href="/itinera-case-study"
-      aria-label="Open the Itinera project case study"
+      aria-label="View the Itinera project case study"
       onClick={(event) => {
         sessionStorage.setItem("portfolio:projects-scroll-position", String(window.scrollY));
         if (
@@ -58,7 +58,7 @@ export default function LiveProjectButton({ variant = "light" }: LiveProjectButt
           )}
           <span className="relative inline-flex h-2 w-2 rounded-full bg-[#B600A8]" />
         </span>
-        Live Project
+        View Case Study
         <motion.span
           aria-hidden="true"
           animate={reduceMotion ? undefined : { x: [0, 3, 0] }}
