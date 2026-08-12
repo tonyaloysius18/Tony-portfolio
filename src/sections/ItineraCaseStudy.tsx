@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowUpRight,
   CheckCircle2,
   Database,
   Layers3,
+  Maximize2,
   Route,
   Smartphone,
+  X,
 } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -109,8 +111,10 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 export default function ItineraCaseStudy() {
   const [activeScreen, setActiveScreen] = useState(0);
   const [hoveredScreen, setHoveredScreen] = useState<number | null>(null);
+  const [expandedScreen, setExpandedScreen] = useState<number | null>(null);
   const wheelLockedRef = useRef(false);
   const pointerStartXRef = useRef<number | null>(null);
+  const suppressCardClickRef = useRef(false);
   const tabListRef = useRef<HTMLDivElement>(null);
   const reduceMotion = Boolean(useReducedMotion());
   const previewIndex = hoveredScreen ?? activeScreen;
@@ -161,6 +165,20 @@ export default function ItineraCaseStudy() {
       inline: "center",
     });
   }, [activeScreen, reduceMotion]);
+
+  useEffect(() => {
+    if (expandedScreen === null) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setExpandedScreen(null);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [expandedScreen]);
 
   return (
     <main className="min-h-screen overflow-x-clip bg-[#080909] text-[#D7E2EA]">
@@ -213,6 +231,49 @@ export default function ItineraCaseStudy() {
           </motion.div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {expandedScreen !== null && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${SCREENS[expandedScreen].title} full-size screenshot`}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4 backdrop-blur-xl sm:p-8"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0 }}
+            onClick={() => setExpandedScreen(null)}
+          >
+            <button
+              type="button"
+              onClick={() => setExpandedScreen(null)}
+              aria-label="Close full-size image"
+              className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white transition-colors hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] sm:right-8"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <motion.figure
+              className="flex h-full w-full flex-col items-center justify-center gap-4"
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.35, ease: EASE }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={SCREENS[expandedScreen].src}
+                alt={SCREENS[expandedScreen].title}
+                className="min-h-0 max-h-[calc(100dvh-8rem)] max-w-full rounded-[20px] object-contain shadow-[0_32px_100px_rgba(0,0,0,0.8)]"
+              />
+              <figcaption className="text-center">
+                <span className="block text-sm font-semibold text-white">{SCREENS[expandedScreen].title}</span>
+                <span className="mt-1 block text-xs text-white/55">Tap outside the image to close</span>
+              </figcaption>
+            </motion.figure>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <section className="border-y border-[#D7E2EA]/10 bg-[#0C0C0C] px-4 py-16 sm:px-6 sm:py-24 lg:px-10">
         <Reveal className="mx-auto grid max-w-[1300px] gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
@@ -310,7 +371,13 @@ export default function ItineraCaseStudy() {
                 if (pointerStartXRef.current === null) return;
                 const distance = event.clientX - pointerStartXRef.current;
                 pointerStartXRef.current = null;
-                if (Math.abs(distance) >= 52) moveCarousel(distance < 0 ? 1 : -1);
+                if (Math.abs(distance) >= 52) {
+                  suppressCardClickRef.current = true;
+                  moveCarousel(distance < 0 ? 1 : -1);
+                  window.setTimeout(() => {
+                    suppressCardClickRef.current = false;
+                  }, 120);
+                }
               }}
               onPointerCancel={() => {
                 pointerStartXRef.current = null;
@@ -336,11 +403,15 @@ export default function ItineraCaseStudy() {
                     <button
                       key={item.src}
                       type="button"
-                      aria-label={isActive ? `${item.title}, current screen` : `Show ${item.title}`}
+                      aria-label={isActive ? `${item.title}, open full-size image` : `Show ${item.title}`}
                       aria-pressed={isActive}
                       tabIndex={distance <= 2 ? 0 : -1}
-                      onClick={() => selectScreen(index)}
-                      className="absolute left-1/2 top-1/2 h-[68%] w-[42%] max-w-[270px] overflow-hidden rounded-[18px] border border-[#D7E2EA]/18 bg-[#080909] p-0 shadow-[0_24px_70px_rgba(0,0,0,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] sm:h-[78%] sm:w-[32%] lg:w-[29%]"
+                      onClick={() => {
+                        if (suppressCardClickRef.current) return;
+                        if (isActive) setExpandedScreen(index);
+                        else selectScreen(index);
+                      }}
+                      className="absolute left-1/2 top-1/2 h-[82%] w-[58%] max-w-[270px] overflow-hidden rounded-[18px] border border-[#D7E2EA]/18 bg-[#080909] p-0 shadow-[0_24px_70px_rgba(0,0,0,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] sm:h-[78%] sm:w-[36%] lg:w-[29%]"
                       style={{
                         transform: `translate(-50%, -50%) translateX(calc(${position} * clamp(82px, 11vw, 150px))) translateZ(${-distance * 72}px) rotateY(${position * -34}deg) scale(${isActive ? 1 : Math.max(0.72, 0.88 - distance * 0.04)})`,
                         opacity,
@@ -353,7 +424,12 @@ export default function ItineraCaseStudy() {
                         transformStyle: "preserve-3d",
                       }}
                     >
-                      <img src={item.src} alt="" draggable={false} className="h-full w-full select-none object-cover" />
+                      <img src={item.src} alt="" draggable={false} className="h-full w-full select-none object-contain" />
+                      {isActive && (
+                        <span className="absolute right-2.5 top-2.5 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/80 backdrop-blur-md">
+                          <Maximize2 className="h-4 w-4" />
+                        </span>
+                      )}
                     </button>
                   );
                 })}
