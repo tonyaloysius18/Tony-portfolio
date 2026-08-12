@@ -40,11 +40,7 @@ function json(data: unknown, status = 200) {
   });
 }
 
-export default async function handler(request: Request) {
-  if (request.method !== "POST") {
-    return json({ error: "Method not allowed" }, 405);
-  }
-
+export async function POST(request: Request) {
   const visitorId = request.headers.get("x-visitor-id")?.trim();
   if (!visitorId || !/^[a-f0-9-]{36}$/i.test(visitorId)) {
     return json({ error: "Invalid visitor identifier" }, 400);
