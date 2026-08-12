@@ -9,6 +9,8 @@ import ItineraCaseStudy from "./sections/ItineraCaseStudy";
 
 function App() {
   const [hash, setHash] = useState(() => window.location.hash);
+  const isItineraCaseStudy =
+    window.location.pathname === "/itinera-case-study" || hash === "#itinera-case-study";
 
   useEffect(() => {
     const handleHashChange = () => setHash(window.location.hash);
@@ -17,7 +19,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (hash === "#itinera-case-study") return;
+    if (isItineraCaseStudy) return;
     const targetId = hash.replace("#", "");
     if (!targetId) return;
 
@@ -35,9 +37,9 @@ function App() {
     });
 
     return () => cancelAnimationFrame(frame);
-  }, [hash]);
+  }, [hash, isItineraCaseStudy]);
 
-  if (hash === "#itinera-case-study") {
+  if (isItineraCaseStudy) {
     return <ItineraCaseStudy />;
   }
 

@@ -185,7 +185,7 @@ export default function ItineraCaseStudy() {
       <nav className="sticky top-0 z-50 border-b border-[#D7E2EA]/10 bg-[#080909]/88 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-10">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4">
           <a
-            href="#projects"
+            href="/#projects"
             className="group inline-flex min-h-11 items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/68 transition-colors hover:text-[#D7E2EA]"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
@@ -411,7 +411,7 @@ export default function ItineraCaseStudy() {
                         if (isActive) setExpandedScreen(index);
                         else selectScreen(index);
                       }}
-                      className="absolute left-1/2 top-1/2 h-[82%] w-[58%] max-w-[270px] overflow-hidden rounded-[18px] border border-[#D7E2EA]/18 bg-[#080909] p-0 shadow-[0_24px_70px_rgba(0,0,0,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] sm:h-[78%] sm:w-[36%] lg:w-[29%]"
+                      className="absolute left-1/2 top-1/2 h-[90%] w-auto aspect-[864/1821] overflow-hidden rounded-[18px] border border-[#D7E2EA]/18 bg-transparent p-0 shadow-[0_24px_70px_rgba(0,0,0,0.55)] outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] sm:h-[82%] lg:h-[78%]"
                       style={{
                         transform: `translate(-50%, -50%) translateX(calc(${position} * clamp(82px, 11vw, 150px))) translateZ(${-distance * 72}px) rotateY(${position * -34}deg) scale(${isActive ? 1 : Math.max(0.72, 0.88 - distance * 0.04)})`,
                         opacity,
@@ -424,10 +424,10 @@ export default function ItineraCaseStudy() {
                         transformStyle: "preserve-3d",
                       }}
                     >
-                      <img src={item.src} alt="" draggable={false} className="h-full w-full select-none object-contain" />
+                      <img src={item.src} alt="" draggable={false} className="block h-full w-full select-none object-cover" />
                       {isActive && (
-                        <span className="absolute right-2.5 top-2.5 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/80 backdrop-blur-md">
-                          <Maximize2 className="h-4 w-4" />
+                        <span className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/85 backdrop-blur-md">
+                          <Maximize2 className="h-3.5 w-3.5" />
                         </span>
                       )}
                     </button>
