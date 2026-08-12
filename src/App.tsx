@@ -17,12 +17,15 @@ function App() {
     pathname === "/itinera-case-study" || hash === "#itinera-case-study";
 
   useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
     const handleLocationChange = () => {
       setLocation({ pathname: window.location.pathname, hash: window.location.hash });
     };
     window.addEventListener("hashchange", handleLocationChange);
     window.addEventListener("popstate", handleLocationChange);
     return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
       window.removeEventListener("hashchange", handleLocationChange);
       window.removeEventListener("popstate", handleLocationChange);
     };

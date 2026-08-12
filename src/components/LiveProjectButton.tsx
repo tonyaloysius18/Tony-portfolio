@@ -27,6 +27,7 @@ export default function LiveProjectButton({ variant = "light" }: LiveProjectButt
         ) return;
         event.preventDefault();
         window.history.pushState({}, "", "/itinera-case-study");
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
         window.dispatchEvent(new Event("popstate"));
       }}
       animate={

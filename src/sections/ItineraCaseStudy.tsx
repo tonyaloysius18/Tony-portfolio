@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -145,10 +145,13 @@ export default function ItineraCaseStudy() {
     setActiveScreen((current) => (current + direction + SCREENS.length) % SCREENS.length);
   };
 
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   useEffect(() => {
     const previousTitle = document.title;
     document.title = "Itinera Case Study — Tony Aloysius";
-    window.scrollTo({ top: 0, behavior: "auto" });
     return () => {
       document.title = previousTitle;
     };
@@ -238,7 +241,15 @@ export default function ItineraCaseStudy() {
             </div>
 
             <div className="overflow-hidden rounded-[26px] border border-[#D7E2EA]/18 bg-[#0C0C0C] shadow-[0_36px_110px_rgba(0,0,0,0.5)] sm:rounded-[36px]">
-              <img src="/projects/itinera/feature_graphic.jpg" alt="Itinera product banner" className="block h-auto w-full" />
+              <img
+                src="/projects/itinera/feature_graphic.jpg"
+                alt="Itinera product banner"
+                width="1794"
+                height="478"
+                fetchPriority="high"
+                decoding="async"
+                className="block h-auto w-full"
+              />
             </div>
           </motion.div>
         </div>
@@ -436,7 +447,17 @@ export default function ItineraCaseStudy() {
                         transformStyle: "preserve-3d",
                       }}
                     >
-                      <img src={item.src} alt="" draggable={false} className="block h-full w-full select-none object-cover" />
+                      <img
+                        src={item.src}
+                        alt=""
+                        width="864"
+                        height="1821"
+                        loading={distance <= 1 ? "eager" : "lazy"}
+                        fetchPriority={isActive ? "high" : "low"}
+                        decoding="async"
+                        draggable={false}
+                        className="block h-full w-full select-none object-cover"
+                      />
                       {isActive && (
                         <span className="absolute right-2 top-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/85 backdrop-blur-md">
                           <Maximize2 className="h-3.5 w-3.5" />
