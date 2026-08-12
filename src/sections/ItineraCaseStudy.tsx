@@ -159,13 +159,16 @@ export default function ItineraCaseStudy() {
 
   useEffect(() => {
     if (window.matchMedia("(min-width: 1024px)").matches) return;
-    const activeTab = tabListRef.current?.querySelector<HTMLElement>(
+    const tabList = tabListRef.current;
+    const activeTab = tabList?.querySelector<HTMLElement>(
       `[role="tab"][data-screen-index="${activeScreen}"]`,
     );
-    activeTab?.scrollIntoView({
+    if (!tabList || !activeTab) return;
+
+    const centeredLeft = activeTab.offsetLeft - (tabList.clientWidth - activeTab.offsetWidth) / 2;
+    tabList.scrollTo({
+      left: Math.max(0, centeredLeft),
       behavior: reduceMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
     });
   }, [activeScreen, reduceMotion]);
 
