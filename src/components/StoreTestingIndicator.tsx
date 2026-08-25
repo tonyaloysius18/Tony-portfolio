@@ -1,5 +1,6 @@
 export default function StoreTestingIndicator({ compact = false }: { compact?: boolean }) {
   const iconSize = compact ? "h-3 w-3" : "h-3.5 w-3.5";
+  const playStoreUrl = "https://play.google.com/store/apps/details?id=com.itinera.app";
 
   return (
     <div
@@ -28,7 +29,13 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
         <span>App Store</span>
       </span>
       <span aria-hidden="true" className="text-[#D7E2EA]/28">+</span>
-      <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+      <a
+        href={playStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download Itinera on Google Play (opens in a new tab)"
+        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-sm text-[#D7E2EA]/80 transition-colors hover:text-[#D7E2EA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B600A8]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C]"
+      >
         <svg
           aria-hidden="true"
           className={`${iconSize} shrink-0`}
@@ -40,7 +47,8 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
           <path fill="#00F076" d="M15.08 8.63 5.48 2.17c-.94-.53-1.78-.46-2.28.43l8.86 9.4 3.02-3.37Z" />
         </svg>
         <span>Play Store</span>
-      </span>
+        <span aria-hidden="true" className="text-[0.85em] leading-none">&#8599;</span>
+      </a>
     </div>
   );
 }
