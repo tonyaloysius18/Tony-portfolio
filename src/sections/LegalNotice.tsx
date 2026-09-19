@@ -117,8 +117,8 @@ export default function LegalNotice() {
             <p>
               <strong className="font-medium text-[#D7E2EA]/86">Formulaire de contact.</strong> Les
               informations saisies (nom, adresse e-mail, message) sont utilisées uniquement pour répondre à
-              votre demande, sur la base de votre consentement. Elles sont acheminées par e-mail via les
-              services d’envoi Resend et FormSubmit et conservées le temps nécessaire au traitement de votre demande, puis
+              votre demande, sur la base de votre consentement. Elles sont acheminées par e-mail via le
+              service d’envoi Resend et conservées le temps nécessaire au traitement de votre demande, puis
               pendant la durée de la relation commerciale le cas échéant.
             </p>
             <p>

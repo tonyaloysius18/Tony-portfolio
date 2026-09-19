@@ -17,7 +17,6 @@ import RevealHeading from "../components/RevealHeading";
 import VisitorCounter from "../components/VisitorCounter";
 
 const EMAIL = "ynotlabs.dev@gmail.com";
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${EMAIL}`;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 type SubmitState = "idle" | "sending" | "success" | "error";
@@ -131,21 +130,14 @@ export default function ContactSection() {
     setErrorMessage("");
 
     try {
-      const request = (url: string) =>
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
-
-      // Own domain first (better inbox delivery); FormSubmit only while it isn't configured.
-      let response = await request("/api/contact");
-      if (response.status === 503 || response.status === 404) {
-        response = await request(FORM_ENDPOINT);
-      }
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("The message could not be sent.");
@@ -244,9 +236,6 @@ export default function ContactSection() {
                 transition={{ duration: reduceMotion ? 0 : 0.85, delay: 0.22, ease: EASE }}
                 className="space-y-3.5 sm:space-y-4"
             >
-              <input type="hidden" name="_subject" value="New portfolio project enquiry" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
               <label className="block">
