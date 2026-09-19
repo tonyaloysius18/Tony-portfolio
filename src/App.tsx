@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 
 const PortfolioHome = lazy(() => import("./PortfolioHome"));
 const ItineraCaseStudy = lazy(() => import("./sections/ItineraCaseStudy"));
+const LegalNotice = lazy(() => import("./sections/LegalNotice"));
 
 function RouteLoading() {
   return (
@@ -9,7 +10,7 @@ function RouteLoading() {
       <div className="flex flex-col items-center gap-4" role="status" aria-label="Loading page">
         <span className="h-8 w-8 animate-spin rounded-full border-2 border-[#D7E2EA]/15 border-t-[#B600A8]" />
         <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-[#D7E2EA]/50">
-          Loading Itinera
+          Loading
         </span>
       </div>
     </div>
@@ -24,6 +25,7 @@ function App() {
   const { pathname, hash } = location;
   const isItineraCaseStudy =
     pathname === "/itinera-case-study" || hash === "#itinera-case-study";
+  const isLegalNotice = pathname === "/mentions-legales";
 
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
@@ -41,7 +43,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isItineraCaseStudy) return;
+    if (isItineraCaseStudy || isLegalNotice) return;
     const targetId = hash.replace("#", "");
     if (!targetId) return;
 
@@ -69,7 +71,15 @@ function App() {
     frame = requestAnimationFrame(scrollToTarget);
 
     return () => cancelAnimationFrame(frame);
-  }, [hash, isItineraCaseStudy]);
+  }, [hash, isItineraCaseStudy, isLegalNotice]);
+
+  if (isLegalNotice) {
+    return (
+      <Suspense fallback={<RouteLoading />}>
+        <LegalNotice />
+      </Suspense>
+    );
+  }
 
   if (isItineraCaseStudy) {
     return (

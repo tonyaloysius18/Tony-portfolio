@@ -131,14 +131,21 @@ export default function ContactSection() {
     setErrorMessage("");
 
     try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const request = (url: string) =>
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+
+      // Own domain first (better inbox delivery); FormSubmit only while it isn't configured.
+      let response = await request("/api/contact");
+      if (response.status === 503 || response.status === 404) {
+        response = await request(FORM_ENDPOINT);
+      }
 
       if (!response.ok) {
         throw new Error("The message could not be sent.");
@@ -366,16 +373,14 @@ export default function ContactSection() {
               aria-label="Business details"
               className="grid items-center gap-8 border-b border-[#D7E2EA]/14 py-10 md:grid-cols-[minmax(0,320px)_1fr] md:gap-12"
           >
-            <div className="flex w-full max-w-[320px] items-center justify-center overflow-hidden rounded-2xl bg-white p-3">
-              <img
-                  src="/ynot-labs-logo.webp"
-                  alt="YNOT Labs logo"
-                  width={2000}
-                  height={660}
-                  loading="lazy"
-                  className="h-auto w-full"
-              />
-            </div>
+            <img
+                src="/ynot-labs-logo-light.png"
+                alt="YNOT Labs logo"
+                width={1962}
+                height={339}
+                loading="lazy"
+                className="h-auto w-full max-w-[320px]"
+            />
 
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/82">
@@ -406,6 +411,12 @@ export default function ContactSection() {
                 Back to top
                 <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
               </button>
+              <a
+                  href="/mentions-legales"
+                  className="inline-flex min-h-10 items-center transition-colors hover:text-[#D7E2EA]/80"
+              >
+                Mentions légales
+              </a>
               <VisitorCounter />
             </div>
           </footer>
