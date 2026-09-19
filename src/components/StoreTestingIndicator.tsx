@@ -1,6 +1,9 @@
 export default function StoreTestingIndicator({ compact = false }: { compact?: boolean }) {
   const iconSize = compact ? "h-3 w-3" : "h-3.5 w-3.5";
   const playStoreUrl = "https://play.google.com/store/apps/details?id=com.itinera.app";
+  const appStoreUrl = "https://apps.apple.com/fr/app/itinera-travel-companion/id6807706225";
+  const linkClass =
+    "inline-flex items-center gap-1.5 whitespace-nowrap rounded-sm text-[#D7E2EA]/80 transition-colors hover:text-[#D7E2EA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B600A8]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C]";
 
   return (
     <div
@@ -17,7 +20,13 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
       </span>
       <span className="font-semibold text-[#D7E2EA]">Available</span>
       <span aria-hidden="true" className="text-[#D7E2EA]/28">•</span>
-      <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+      <a
+        href={appStoreUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download Itinera on the App Store (opens in a new tab)"
+        className={linkClass}
+      >
         <svg
           aria-hidden="true"
           className={`${iconSize} shrink-0 text-[#D7E2EA]`}
@@ -27,14 +36,15 @@ export default function StoreTestingIndicator({ compact = false }: { compact?: b
           <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.28-.07 2.2.7 2.97.75 1.15-.23 2.25-.89 3.47-.8 1.46.12 2.56.69 3.29 1.75-3.01 1.8-2.29 5.77.46 6.88-.55 1.45-1.27 2.88-2.19 4.39ZM12.03 7.25c-.15-2.16 1.61-3.95 3.62-4.12.28 2.5-2.27 4.37-3.62 4.12Z" />
         </svg>
         <span>App Store</span>
-      </span>
+        <span aria-hidden="true" className="text-[0.85em] leading-none">&#8599;</span>
+      </a>
       <span aria-hidden="true" className="text-[#D7E2EA]/28">+</span>
       <a
         href={playStoreUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Itinera on Google Play (opens in a new tab)"
-        className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-sm text-[#D7E2EA]/80 transition-colors hover:text-[#D7E2EA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B600A8]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C0C0C]"
+        className={linkClass}
       >
         <svg
           aria-hidden="true"
