@@ -358,36 +358,53 @@ export default function ContactSection() {
             </p>
           </div>
 
-          <section
+          <motion.section
               aria-label="Business details"
-              className="grid items-center gap-8 border-b border-[#D7E2EA]/14 py-10 md:grid-cols-[minmax(0,320px)_1fr] md:gap-12"
+              className="relative mt-10 overflow-hidden rounded-[24px] border border-[#D7E2EA]/14 bg-[#D7E2EA]/[0.025] p-6 sm:p-8 lg:p-10"
+              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.8, ease: EASE }}
           >
-            <img
-                src="/ynot-labs-logo-light.png"
-                alt="YNOT Labs logo"
-                width={1962}
-                height={339}
-                loading="lazy"
-                className="h-auto w-full max-w-[320px]"
+            <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0AA5AC]/70 to-transparent"
             />
 
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/82">
-                YNOT Labs
-              </p>
-              <p className="mt-1 text-xs text-[#D7E2EA]/52">
-                Freelance mobile app development — trading name of Tony Ajay Aloysius Suresh
-              </p>
-              <dl className="mt-5 grid gap-x-10 gap-y-4 text-xs sm:grid-cols-2 xl:grid-cols-3">
-                {BUSINESS_DETAILS.map(({ label, value }) => (
-                    <div key={label}>
-                      <dt className="uppercase tracking-[0.14em] text-[#D7E2EA]/42">{label}</dt>
-                      <dd className="mt-1 text-[#D7E2EA]/78">{value}</dd>
-                    </div>
-                ))}
-              </dl>
+            <div className="grid items-center gap-8 md:grid-cols-[minmax(0,300px)_1fr] md:gap-12 lg:gap-16">
+              <div className="flex flex-col gap-5 md:border-r md:border-[#D7E2EA]/12 md:pr-12">
+                <img
+                    src="/ynot-labs-logo-light.webp"
+                    alt="YNOT Labs logo"
+                    width={1962}
+                    height={339}
+                    loading="lazy"
+                    className="h-auto w-full max-w-[280px]"
+                />
+                <p className="inline-flex w-fit items-center gap-2 rounded-full border border-[#D7E2EA]/16 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/62">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0AA5AC]" />
+                  Registered business · France
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/82">
+                  YNOT Labs
+                </p>
+                <p className="mt-1 text-xs text-[#D7E2EA]/52">
+                  Freelance mobile app development — trading name of Tony Ajay Aloysius Suresh
+                </p>
+                <dl className="mt-6 grid gap-x-10 gap-y-5 text-xs sm:grid-cols-2 xl:grid-cols-3">
+                  {BUSINESS_DETAILS.map(({ label, value }) => (
+                      <div key={label}>
+                        <dt className="uppercase tracking-[0.14em] text-[#D7E2EA]/42">{label}</dt>
+                        <dd className="mt-1 text-[#D7E2EA]/82">{value}</dd>
+                      </div>
+                  ))}
+                </dl>
+              </div>
             </div>
-          </section>
+          </motion.section>
 
           <footer className="flex flex-col gap-4 pt-8 text-xs text-[#D7E2EA]/42 sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 Tony Aloysius — YNOT Labs · SIRET 108 766 288 00014 · Toulouse, France</span>

@@ -45,7 +45,7 @@ export default function LegalNotice() {
         </a>
 
         <img
-          src="/ynot-labs-logo-light.png"
+          src="/ynot-labs-logo-light.webp"
           alt="YNOT Labs"
           width={1962}
           height={339}

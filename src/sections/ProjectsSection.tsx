@@ -40,25 +40,25 @@ const PROJECTS: Project[] = [
         description:
             "Cross-platform travel app for shared itineraries, ticket storage, and trip expenses.",
         technologies: ["Kotlin Multiplatform", "Compose", "SwiftUI", "Firebase"],
-        featureGraphic: "/projects/itinera/feature_graphic.jpg",
+        featureGraphic: "/projects/itinera/feature_graphic.webp",
         screenshots: [
             {
-                src: "/projects/itinera/trip_home.jpg",
+                src: "/projects/itinera/trip_home.webp",
                 label: "All your trips",
                 caption: "Upcoming and previous journeys in one shared home.",
             },
             {
-                src: "/projects/itinera/calender.jpg",
+                src: "/projects/itinera/calender.webp",
                 label: "See the whole journey",
                 caption: "Every leg of the trip organised day by day in one calendar.",
             },
             {
-                src: "/projects/itinera/traveller.jpg",
+                src: "/projects/itinera/traveller.webp",
                 label: "Travel together",
                 caption: "Keep the whole travel crew connected to the shared itinerary.",
             },
             {
-                src: "/projects/itinera/expense.jpg",
+                src: "/projects/itinera/expense.webp",
                 label: "Split costs",
                 caption: "Group expenses with a clear balance for every traveller.",
             },
@@ -72,26 +72,26 @@ const PROJECTS: Project[] = [
         description:
             "Catholic reference content is spread across disconnected books, websites, and single-purpose applications.",
         technologies: ["Kotlin Multiplatform", "Compose", "Ktor", "Firebase"],
-        featureGraphic: "/projects/cathopedia/feature_graphic.jpg",
+        featureGraphic: "/projects/cathopedia/feature_graphic.webp",
         comingSoon: true,
         screenshots: [
             {
-                src: "/projects/cathopedia/dashboard.jpg",
+                src: "/projects/cathopedia/dashboard.webp",
                 label: "The Church, in your pocket",
                 caption: "A focused starting point for the complete content library.",
             },
             {
-                src: "/projects/cathopedia/saints_popes.jpg",
+                src: "/projects/cathopedia/saints_popes.webp",
                 label: "Saints & popes",
                 caption: "Connected biographies, feast days, and historical context.",
             },
             {
-                src: "/projects/cathopedia/eucharistic_miracles.jpg",
+                src: "/projects/cathopedia/eucharistic_miracles.webp",
                 label: "Eucharistic miracles",
                 caption: "Searchable records organised by place and period.",
             },
             {
-                src: "/projects/cathopedia/sacred_places.jpg",
+                src: "/projects/cathopedia/sacred_places.webp",
                 label: "Sacred places",
                 caption: "Churches and pilgrimage destinations gathered by location.",
             },

@@ -15,6 +15,19 @@
   }
 }
 
+::selection {
+  background: rgba(10, 165, 172, 0.35);
+  color: #ffffff;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(215, 226, 234, 0.75);
+  outline-offset: 4px;
+}
+
 .hero-heading {
   background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
   -webkit-background-clip: text;

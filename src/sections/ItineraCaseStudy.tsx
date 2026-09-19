@@ -17,49 +17,49 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 const SCREENS = [
   {
-    src: "/projects/itinera/trip_home.jpg",
+    src: "/projects/itinera/trip_home.webp",
     label: "01 · Trip home",
     title: "Every journey in one place",
     description: "Upcoming and previous trips stay organised in one shared home.",
   },
   {
-    src: "/projects/itinera/traveller.jpg",
+    src: "/projects/itinera/traveller.webp",
     label: "02 · Travellers",
     title: "Keep the travel crew in sync",
     description: "Invite travellers and keep everyone connected to the shared trip.",
   },
   {
-    src: "/projects/itinera/trip_detail.jpg",
+    src: "/projects/itinera/trip_detail.webp",
     label: "03 · Itinerary",
     title: "Build the trip together",
     description: "A day-by-day plan keeps each stop in the right order for the group.",
   },
   {
-    src: "/projects/itinera/calender.jpg",
+    src: "/projects/itinera/calender.webp",
     label: "04 · Calendar",
     title: "See the journey day by day",
     description: "Flights, trains and activities stay organised chronologically across the trip.",
   },
   {
-    src: "/projects/itinera/checklist.jpg",
+    src: "/projects/itinera/checklist.webp",
     label: "05 · Checklist",
     title: "Remember what to pack",
     description: "A trip checklist keeps documents, essentials and travel gear ready before departure.",
   },
   {
-    src: "/projects/itinera/document.jpg",
+    src: "/projects/itinera/document.webp",
     label: "06 · Documents",
     title: "Keep every ticket close",
     description: "Tickets and travel documents remain available inside their trip.",
   },
   {
-    src: "/projects/itinera/expense.jpg",
+    src: "/projects/itinera/expense.webp",
     label: "07 · Expenses",
     title: "Split costs without friction",
     description: "Group expenses provide a clear balance for every traveller.",
   },
   {
-    src: "/projects/itinera/currency.jpg",
+    src: "/projects/itinera/currency.webp",
     label: "08 · Currency",
     title: "Understand spending anywhere",
     description: "Convert currencies and keep international spending easier to understand while travelling.",
@@ -249,7 +249,7 @@ export default function ItineraCaseStudy() {
 
             <div className="overflow-hidden rounded-[26px] border border-[#D7E2EA]/18 bg-[#0C0C0C] shadow-[0_36px_110px_rgba(0,0,0,0.5)] sm:rounded-[36px]">
               <img
-                src="/projects/itinera/feature_graphic.jpg"
+                src="/projects/itinera/feature_graphic.webp"
                 alt="Itinera product banner"
                 width="1794"
                 height="478"

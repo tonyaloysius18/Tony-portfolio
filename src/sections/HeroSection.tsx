@@ -4,7 +4,7 @@ import Magnet from "../components/Magnet";
 
 const NAV_LINKS = ["About", "Services", "Projects"];
 
-const PORTRAIT_URL = "/portrait.png";
+const PORTRAIT_URL = "/portrait.webp";
 
 export default function HeroSection() {
   return (
@@ -27,9 +27,13 @@ export default function HeroSection() {
                 <span key={link} className="flex items-center gap-8">
               <a
                   href={`#${link.toLowerCase()}`}
-                  className="text-[#D7E2EA] font-medium uppercase tracking-wider text-sm hover:opacity-70 transition-opacity duration-200"
+                  className="group relative py-1 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm"
               >
                 {link}
+                <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-[#D7E2EA]/70 transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                />
               </a>
                   {i < NAV_LINKS.length - 1 && (
                       <span className="w-1 h-1 rounded-full bg-[#D7E2EA]/50" />
@@ -94,6 +98,23 @@ export default function HeroSection() {
 
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 px-6 md:px-10 pb-8 md:pb-10">
           <FadeIn delay={0.5} y={20} className="flex flex-col gap-4">
+            <a
+                href="#contact"
+                aria-label="YNOT Labs — freelance mobile app studio"
+                className="inline-flex w-fit items-center gap-3 rounded-full border border-[#D7E2EA]/18 bg-[#D7E2EA]/[0.04] py-2 pl-4 pr-5 transition-colors duration-300 hover:border-[#D7E2EA]/40"
+            >
+              <img
+                  src="/ynot-labs-logo-light.webp"
+                  alt=""
+                  width={1962}
+                  height={339}
+                  className="h-4 w-auto"
+              />
+              <span className="h-3 w-px bg-[#D7E2EA]/25" />
+              <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#D7E2EA]/62 sm:text-[11px]">
+                Freelance studio
+              </span>
+            </a>
             <p
                 className="text-[#D7E2EA] font-light max-w-sm"
                 style={{ fontSize: "clamp(0.95rem, 1.6vw, 1.15rem)" }}

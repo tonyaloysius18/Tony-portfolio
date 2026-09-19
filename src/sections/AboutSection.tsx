@@ -21,7 +21,7 @@ const PROOF_ITEMS = [
 
 const DECORATIONS = [
   {
-    src: "/about/crescent.png",
+    src: "/about/crescent.webp",
     side: "left" as const,
     slotClassName: "top-[clamp(2.5rem,5svh,4rem)]",
     sizeClassName: "w-[clamp(56px,72cqw,190px)] opacity-85",
@@ -46,7 +46,7 @@ const DECORATIONS = [
     delay: 0.15,
   },
   {
-    src: "/about/cursor.png",
+    src: "/about/cursor.webp",
     side: "right" as const,
     slotClassName: "bottom-[clamp(9rem,20svh,13rem)]",
     sizeClassName: "w-[clamp(56px,72cqw,175px)] opacity-85",
@@ -128,7 +128,7 @@ export default function AboutSection() {
             <div className="max-w-xl">
               <FadeIn y={10} duration={0.55} once={false}>
                 <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/65">
-                  Independent mobile app developer · France
+                  Freelance mobile app developer · YNOT Labs · Toulouse, France
                 </p>
               </FadeIn>
 
