@@ -372,7 +372,7 @@ export default function ItineraCaseStudy() {
                   onFocus={() => previewScreen(index)}
                   className={`min-h-16 min-w-[158px] shrink-0 snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-h-0 lg:min-w-0 lg:px-5 lg:py-3.5 ${
                     previewIndex === index
-                      ? "translate-x-1 border-[#9A4DCC]/75 bg-[#7621B0]/14 opacity-100 shadow-[0_12px_42px_rgba(118,33,176,0.2)]"
+                      ? "border-[#9A4DCC]/75 bg-[#7621B0]/14 opacity-100 shadow-[0_12px_42px_rgba(118,33,176,0.2)]"
                       : hoveredScreen !== null
                         ? "scale-[0.985] border-[#D7E2EA]/8 bg-[#D7E2EA]/[0.01] opacity-30"
                         : "border-[#D7E2EA]/12 bg-[#D7E2EA]/[0.018] opacity-100 hover:border-[#D7E2EA]/28"
