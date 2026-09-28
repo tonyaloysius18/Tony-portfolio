@@ -48,14 +48,14 @@ const PROJECTS: Project[] = [
                 caption: "Upcoming and previous journeys in one shared home.",
             },
             {
+                src: "/projects/itinera/nera_chat.webp",
+                label: "Plan with Nera",
+                caption: "An AI trip planner that drafts a day-by-day itinerary from a single request.",
+            },
+            {
                 src: "/projects/itinera/calender.webp",
                 label: "See the whole journey",
                 caption: "Every leg of the trip organised day by day in one calendar.",
-            },
-            {
-                src: "/projects/itinera/traveller.webp",
-                label: "Travel together",
-                caption: "Keep the whole travel crew connected to the shared itinerary.",
             },
             {
                 src: "/projects/itinera/expense.webp",
