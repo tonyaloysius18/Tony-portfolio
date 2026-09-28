@@ -26,7 +26,7 @@ function Row({ label, value }: { label: string; value: ReactNode }) {
 export default function LegalNotice() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Mentions légales | YNOT Labs — Tony Aloysius";
+    document.title = "Mentions légales | YNOT Labs";
     window.scrollTo(0, 0);
     return () => {
       document.title = previousTitle;
@@ -62,7 +62,7 @@ export default function LegalNotice() {
               <Row label="Exploitant" value="Tony Ajay Aloysius Suresh, entrepreneur individuel" />
               <Row label="SIREN" value="108 766 288" />
               <Row label="SIRET" value="108 766 288 00014" />
-              <Row label="Code APE" value="58.29C — Édition de logiciels applicatifs" />
+              <Row label="Code APE" value="58.29C - Édition de logiciels applicatifs" />
               <Row label="Immatriculation au RNE" value="14 août 2026" />
               <Row label="Adresse" value="5 Rue Arnaud Baric, 31300 Toulouse, France" />
               <Row

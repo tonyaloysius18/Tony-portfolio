@@ -725,17 +725,6 @@ export default function ProjectsSection() {
                             />
                         ))}
 
-                        <div className="absolute right-[-3.25rem] top-1/2 hidden -translate-y-1/2 flex-col items-center gap-5 xl:flex">
-              <span className="rotate-180 text-[11px] uppercase tracking-[0.2em] text-[#D7E2EA]/42 [writing-mode:vertical-rl]">
-                Scroll to explore
-              </span>
-                            <span className="h-20 w-px bg-gradient-to-b from-[#D7E2EA]/35 to-[#7E70FF]" />
-                            <motion.span
-                                className="h-2 w-2 rounded-full bg-[#AAA0FF] shadow-[0_0_14px_#776BFF]"
-                                animate={{ y: [0, 10, 0], opacity: [0.55, 1, 0.55] }}
-                                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                            />
-                        </div>
                     </div>
                 </div>
             </div>

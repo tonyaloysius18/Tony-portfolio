@@ -1,4 +1,4 @@
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import Magnet from "../components/Magnet";
 
@@ -100,7 +100,7 @@ export default function HeroSection() {
           <FadeIn delay={0.5} y={20} className="flex flex-col gap-4">
             <a
                 href="#contact"
-                aria-label="YNOT Labs — freelance mobile app studio"
+                aria-label="YNOT Labs, freelance mobile app studio"
                 className="inline-flex w-fit items-center gap-3 rounded-full border border-[#D7E2EA]/18 bg-[#D7E2EA]/[0.04] py-2 pl-4 pr-5 transition-colors duration-300 hover:border-[#D7E2EA]/40"
             >
               <img
@@ -145,10 +145,6 @@ export default function HeroSection() {
               className="flex flex-col items-start md:items-end gap-3 text-[#D7E2EA]/60 text-xs sm:text-sm"
           >
             <span>Based in France · Working worldwide</span>
-            <span className="flex items-center gap-2 uppercase tracking-widest">
-            Scroll to explore
-            <ArrowDown size={14} />
-          </span>
           </FadeIn>
         </div>
       </section>

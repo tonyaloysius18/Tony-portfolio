@@ -69,7 +69,7 @@ const BUSINESS_DETAILS = [
   { label: "Trading name", value: "YNOT Labs" },
   { label: "SIREN", value: "108 766 288" },
   { label: "SIRET", value: "108 766 288 00014" },
-  { label: "APE code", value: "58.29C — Software publishing" },
+  { label: "APE code", value: "58.29C - Software publishing" },
   { label: "Registered (RNE)", value: "14 August 2026" },
   { label: "Address", value: "5 Rue Arnaud Baric, 31300 Toulouse, France" },
 ];
@@ -223,7 +223,7 @@ export default function ContactSection() {
                   transition={{ duration: reduceMotion ? 0 : 0.75, delay: 0.3, ease: EASE }}
                   className="mt-8 max-w-xl text-base leading-relaxed text-[#D7E2EA]/66 sm:mt-10 sm:text-lg lg:text-xl"
               >
-                Have an app to build—or one that needs thoughtful improvement? I&apos;m currently
+                Have an app to build, or one that needs thoughtful improvement? I&apos;m currently
                 taking on selected mobile product projects.
               </motion.p>
             </div>
@@ -321,7 +321,7 @@ export default function ContactSection() {
               <div className="flex min-h-6 items-start justify-between gap-4 px-1 pt-1 text-xs">
                 <p aria-live="polite" className="text-[#D7E2EA]/52">
                   {submitState === "sending" && "Sending your message..."}
-                  {submitState === "success" && "Thanks — I’ll get back to you shortly."}
+                  {submitState === "success" && "Thanks! I’ll get back to you shortly."}
                   {submitState === "error" && errorMessage}
                 </p>
                 {submitState === "error" && (
@@ -368,7 +368,7 @@ export default function ContactSection() {
           >
             <span
                 aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0AA5AC]/70 to-transparent"
+                className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-[#B600A8]/0 via-[#B600A8] to-[#657FC0]/0"
             />
 
             <div className="grid items-center gap-8 md:grid-cols-[minmax(0,300px)_1fr] md:gap-12 lg:gap-16">
@@ -382,7 +382,7 @@ export default function ContactSection() {
                     className="h-auto w-full max-w-[280px]"
                 />
                 <p className="inline-flex w-fit items-center gap-2 rounded-full border border-[#D7E2EA]/16 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[#D7E2EA]/62">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#0AA5AC]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#B600A8]" />
                   Registered business · France
                 </p>
               </div>
@@ -392,7 +392,7 @@ export default function ContactSection() {
                   YNOT Labs
                 </p>
                 <p className="mt-1 text-xs text-[#D7E2EA]/52">
-                  Freelance mobile app development — trading name of Tony Ajay Aloysius Suresh
+                  Freelance mobile app development, trading name of Tony Ajay Aloysius Suresh
                 </p>
                 <dl className="mt-6 grid gap-x-10 gap-y-5 text-xs sm:grid-cols-2 xl:grid-cols-3">
                   {BUSINESS_DETAILS.map(({ label, value }) => (
@@ -407,7 +407,7 @@ export default function ContactSection() {
           </motion.section>
 
           <footer className="flex flex-col gap-4 pt-8 text-xs text-[#D7E2EA]/42 sm:flex-row sm:items-center sm:justify-between">
-            <span>&copy; 2026 Tony Aloysius — YNOT Labs · SIRET 108 766 288 00014 · Toulouse, France</span>
+            <span>&copy; 2026 Tony Aloysius, YNOT Labs · SIRET 108 766 288 00014 · Toulouse, France</span>
             <div className="flex flex-wrap items-center justify-between gap-3 sm:justify-end sm:gap-5">
               <button
                   type="button"

@@ -152,7 +152,7 @@ export default function ItineraCaseStudy() {
 
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Itinera Case Study — Tony Aloysius";
+    document.title = "Itinera Case Study | Tony Aloysius";
     return () => {
       document.title = previousTitle;
     };

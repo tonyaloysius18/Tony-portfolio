@@ -1,15 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { motion, type MotionValue, useScroll, useTransform } from "framer-motion";
 import { MARQUEE_ROW_ONE, MARQUEE_ROW_TWO } from "../data/techStack";
 
 const ROW1_TRIPLED = [...MARQUEE_ROW_ONE, ...MARQUEE_ROW_ONE, ...MARQUEE_ROW_ONE];
 const ROW2_TRIPLED = [...MARQUEE_ROW_TWO, ...MARQUEE_ROW_TWO, ...MARQUEE_ROW_TWO];
 
-function MarqueeRow({ items, offset }: { items: string[]; offset: number }) {
+function MarqueeRow({ items, x }: { items: string[]; x: MotionValue<number> }) {
   return (
-    <div
-      className="flex gap-3"
-      style={{ transform: `translateX(${offset}px)`, willChange: "transform" }}
-    >
+    <motion.div className="flex gap-3" style={{ x, willChange: "transform" }}>
       {items.map((item, i) => (
         <div
           key={i}
@@ -18,26 +16,32 @@ function MarqueeRow({ items, offset }: { items: string[]; offset: number }) {
           {item}
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
 export default function MarqueeSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState(0);
+  const [sectionTop, setSectionTop] = useState(0);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    function handleScroll() {
+  useLayoutEffect(() => {
+    function measure() {
       const el = sectionRef.current;
       if (!el) return;
-      const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-      setOffset((window.scrollY - sectionTop + window.innerHeight) * 0.3);
+      setSectionTop(el.getBoundingClientRect().top + window.scrollY);
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    measure();
+    window.addEventListener("resize", measure, { passive: true });
+    return () => window.removeEventListener("resize", measure);
   }, []);
+
+  const offset = useTransform(
+    scrollY,
+    (value) => (value - sectionTop + window.innerHeight) * 0.3 - 200,
+  );
+  const offsetInverse = useTransform(offset, (value) => -value);
 
   return (
     <section
@@ -45,8 +49,8 @@ export default function MarqueeSection() {
       className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden"
     >
       <div className="flex flex-col gap-3">
-        <MarqueeRow items={ROW1_TRIPLED} offset={offset - 200} />
-        <MarqueeRow items={ROW2_TRIPLED} offset={-(offset - 200)} />
+        <MarqueeRow items={ROW1_TRIPLED} x={offset} />
+        <MarqueeRow items={ROW2_TRIPLED} x={offsetInverse} />
       </div>
     </section>
   );

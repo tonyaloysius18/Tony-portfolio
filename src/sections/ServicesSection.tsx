@@ -176,7 +176,7 @@ export default function ServicesSection() {
                         One partner across the whole product journey.
                     </h2>
                     <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-[#D7E2EA]/62 sm:text-lg">
-                        Strategy, design, engineering, and release stay in one continuous loop—so the product that ships keeps the clarity of the original idea.
+                        Strategy, design, engineering, and release stay in one continuous loop, so the product that ships keeps the clarity of the original idea.
                     </p>
                 </motion.header>
 
