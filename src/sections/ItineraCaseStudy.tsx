@@ -350,7 +350,7 @@ export default function ItineraCaseStudy() {
           <div className="mt-10 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:gap-8">
             <div
               ref={tabListRef}
-              className="order-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:order-1 lg:grid lg:overflow-visible lg:pb-0"
+              className="order-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:order-1 lg:grid lg:max-h-[620px] lg:gap-1.5 lg:overflow-y-auto lg:overflow-x-visible lg:pb-0 lg:pr-1"
               role="tablist"
               aria-label="Itinera product flow"
               onMouseLeave={clearPreview}
@@ -370,7 +370,7 @@ export default function ItineraCaseStudy() {
                   onClick={() => selectScreen(index)}
                   onMouseEnter={() => previewScreen(index)}
                   onFocus={() => previewScreen(index)}
-                  className={`min-h-16 min-w-[158px] snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-w-0 lg:px-5 lg:py-3.5 ${
+                  className={`min-h-16 min-w-[158px] shrink-0 snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-h-0 lg:min-w-0 lg:px-5 lg:py-2.5 ${
                     previewIndex === index
                       ? "translate-x-1 border-[#9A4DCC]/75 bg-[#7621B0]/14 opacity-100 shadow-[0_12px_42px_rgba(118,33,176,0.2)]"
                       : hoveredScreen !== null
@@ -379,7 +379,7 @@ export default function ItineraCaseStudy() {
                   }`}
                 >
                   <span className="text-[10px] uppercase tracking-[0.16em] text-[#D7E2EA]/42">{item.label}</span>
-                  <span className="mt-1 block text-base font-medium text-[#D7E2EA] sm:text-lg">{item.title}</span>
+                  <span className="mt-1 block text-base font-medium text-[#D7E2EA] sm:text-lg lg:text-base">{item.title}</span>
                 </button>
               ))}
             </div>
