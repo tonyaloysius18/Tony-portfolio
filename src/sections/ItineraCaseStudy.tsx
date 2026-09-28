@@ -370,7 +370,7 @@ export default function ItineraCaseStudy() {
                   onClick={() => selectScreen(index)}
                   onMouseEnter={() => previewScreen(index)}
                   onFocus={() => previewScreen(index)}
-                  className={`min-h-16 min-w-[158px] shrink-0 snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-h-0 lg:min-w-0 lg:px-5 lg:py-3.5 ${
+                  className={`flex min-h-16 min-w-[158px] shrink-0 flex-col justify-center gap-1 snap-center rounded-[18px] border px-4 py-3 text-left transition-[border-color,background-color,transform,opacity] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9A4DCC] lg:min-h-0 lg:min-w-0 lg:px-5 lg:py-3.5 ${
                     previewIndex === index
                       ? "border-[#9A4DCC]/75 bg-[#7621B0]/14 opacity-100 shadow-[0_12px_42px_rgba(118,33,176,0.2)]"
                       : hoveredScreen !== null
@@ -379,7 +379,7 @@ export default function ItineraCaseStudy() {
                   }`}
                 >
                   <span className="text-[10px] uppercase tracking-[0.16em] text-[#D7E2EA]/42">{item.label}</span>
-                  <span className="mt-1 block text-base font-medium text-[#D7E2EA] sm:text-lg lg:text-base">{item.title}</span>
+                  <span className="block text-base font-medium text-[#D7E2EA] sm:text-lg lg:text-base">{item.title}</span>
                 </button>
               ))}
             </div>
